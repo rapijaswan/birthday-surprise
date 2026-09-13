@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Untuk Kamu ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(
+                135deg,
+                #ff4f9a,
+                #ff8fc4,
+                #f5b5dc,
+                #75bfff
+            );
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+.video-box {
+    width: min(700px, 100%);
+    margin: 30px auto;
+    border-radius: 25px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.video-box video {
+    width: 100%;
+    display: block;
+}
+       
+        
+        /* =========================
+   PHOTO SLIDER
+========================= */
+
+.photo-slider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.photo-box {
+    width: min(600px, 80%);
+    height: 350px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 2px solid rgba(255,255,255,0.4);
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+
+    /*
+       CONTAIN = FOTO TIDAK TERPOTONG
+    */
+    object-fit: contain;
+
+    display: block;
+
+    transition: opacity 0.4s ease;
+}
+
+
+/* Tombol kiri dan kanan */
+
+.photo-button {
+    width: 50px;
+    height: 50px;
+
+    padding: 0;
+    margin: 0;
+
+    border-radius: 50%;
+
+    font-size: 35px;
+    line-height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255,255,255,0.2);
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    flex-shrink: 0;
+}
+
+.photo-button:hover {
+    background: rgba(255,255,255,0.35);
+}
+
+
+/* Nomor foto */
+
+.photo-counter {
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    opacity: 0.8;
+
+    letter-spacing: 2px;
+}
+
+
+@media(max-width:600px) {
+
+    .photo-slider {
+        gap: 5px;
+    }
+
+    .photo-box {
+        width: 75%;
+        height: 250px;
+    }
+
+    .photo-button {
+        width: 40px;
+        height: 40px;
+
+        font-size: 28px;
+    }
+
+}
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            animation: move 12s infinite alternate ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            right: -150px;
+            top: 20%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            bottom: -100px;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(50px, -30px) scale(1.15);
+            }
+        }
+
+        /* =========================
+           FLOATING HEARTS
+        ========================= */
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 20px;
+            animation: floatHeart linear infinite;
+            opacity: 0.7;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatHeart {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 900px;
+            min-height: 650px;
+
+            background: rgba(255,255,255,0.15);
+
+            border: 1px solid rgba(255,255,255,0.4);
+
+            border-radius: 35px;
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 30px 80px rgba(90,20,80,0.3);
+
+            padding: 50px 40px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+            display: none;
+            width: 100%;
+            animation: pageIn 0.8s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: clamp(45px, 8vw, 85px);
+            line-height: 1.05;
+            margin-bottom: 25px;
+
+            text-shadow:
+                0 5px 20px rgba(100,20,80,0.3);
+        }
+
+        h2 {
+            font-size: clamp(30px, 5vw, 55px);
+            margin-bottom: 25px;
+        }
+
+        p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .name {
+            font-weight: 800;
+            color: white;
+
+            text-shadow:
+                0 3px 15px rgba(255,30,130,0.6);
+        }
+
+        /* =========================
+           HEART
+        ========================= */
+
+        .big-heart {
+            font-size: 85px;
+            margin-bottom: 25px;
+
+            display: inline-block;
+
+            animation: heartbeat 1.4s infinite;
+        }
+
+        @keyframes heartbeat {
+
+            0%,100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.2);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        button {
+            border: none;
+
+            padding: 15px 32px;
+
+            border-radius: 50px;
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff3f91,
+                    #7bbcff
+                );
+
+            box-shadow:
+                0 10px 30px rgba(80,30,120,0.3);
+
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.03);
+
+            box-shadow:
+                0 15px 40px rgba(80,30,120,0.4);
+        }
+
+        /* =========================
+           PHOTO
+        ========================= */
+
+        .photo-box {
+            width: min(550px, 100%);
+            height: 330px;
+
+            margin: 30px auto;
+
+            border-radius: 25px;
+
+            border: 2px dashed rgba(255,255,255,0.7);
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            background: rgba(255,255,255,0.08);
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            display: block;
+        }
+
+        .photo-placeholder {
+            opacity: 0.8;
+            font-size: 16px;
+        }
+
+        /* =========================
+           LETTER
+        ========================= */
+
+        .letter {
+            max-width: 700px;
+
+            margin: auto;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            text-align: left;
+
+            background: rgba(255,255,255,0.12);
+
+            border:
+                1px solid rgba(255,255,255,0.3);
+        }
+
+        .letter p {
+            margin-bottom: 18px;
+        }
+
+        .signature {
+            text-align: right;
+
+            margin-top: 30px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           PROGRESS DOT
+        ========================= */
+
+        .progress {
+            position: fixed;
+
+            top: 20px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            display: flex;
+
+            gap: 7px;
+
+            z-index: 10;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.4);
+
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            width: 25px;
+
+            border-radius: 10px;
+
+            background: white;
+        }
+
+        /* =========================
+           FINAL
+        ========================= */
+
+        .final-message {
+            font-size: 22px;
+
+            font-weight: 600;
+
+            line-height: 1.8;
+        }
+
+        .love {
+            font-size: 35px;
+
+            margin-top: 30px;
+
+            letter-spacing: 10px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            .card {
+                min-height: 600px;
+
+                padding:
+                    40px 20px;
+
+                border-radius: 25px;
+            }
+
+            p {
+                font-size: 15px;
+                line-height: 1.8;
+            }
+
+            .photo-box {
+                height: 240px;
+            }
+
+            .letter {
+                padding: 22px;
+            }
+
+            button {
+                padding:
+                    13px 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<audio id="bgMusic" loop>
+    <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+</div>
+
+
+<!-- =====================================================
+     FLOATING HEARTS
+===================================================== -->
+
+<div id="hearts"></div>
+
+
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
+
+<div class="progress" id="progress"></div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div class="container">
+
+    <div class="card">
+
+
+        <!-- =================================================
+             PAGE 1
+        ================================================== -->
+
+        <section class="page active">
+
+            <div class="big-heart">
+                💗
+            </div>
+
+            <div class="subtitle">
+                Ada sesuatu untuk kamu sayang...
+            </div>
+
+            <h1>
+                Hai,
+                <span class="name" id="nama1">
+                    NAMA DIA
+                </span>
+            </h1>
+
+            <p>
+                Ada satu hari yang menurutku spesial,
+                karena di hari itu seseorang yang sangat
+                berarti buat aku lahir ke dunia.
+            </p>
+
+            <button onclick="startExperience()">
+                Buka 💕
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 2
+        ================================================== -->
+
+        <section class="page">
+
+            <div class="subtitle">
+                15 September 2026
+            </div>
+
+            <h1>
+                Happy Birthday
+            </h1>
+
+            <h2>
+                <span class="name" id="nama2">
+                    NAMA DIA
+                </span>
+                🎂
+            </h2>
+
+            <p>
+                Selamat ulang tahun, sayang.
+            </p>
+
+            <p>
+                Hari ini bukan cuma tentang bertambahnya
+                usia kamu, tapi juga tentang semua cerita,
+                perjuangan, dan hal indah yang sudah kamu
+                lewati sampai sejauh ini.
+            </p>
+
+            <button onclick="nextPage()">
+                Lanjut 💗
+            </button>
+
+        </section>
+
+
+        <section class="page">
+
+    <div class="subtitle">
+        A little surprise 🎬
+    </div>
+
+    <h2>
+        Ada Video Untuk Kamu ❤️
+    </h2>
+
+    <div class="video-box">
+
+        <video controls playsinline>
+            <source src="video-kenangan.mp4" type="video/mp4">
+            Browser kamu tidak mendukung video.
+        </video>
+
+    </div>
+
+    <p>
+        TULIS PESAN UNTUK VIDEO DI SINI
+    </p>
+
+    <button onclick="nextPage()">
+        Lanjut 💌
+    </button>
+
+</section>
+
+        <!-- =================================================
+            PAGE 3 - FOTO KENANGAN
+        ================================================== -->
+
+        <section class="page">
+
+            <div class="subtitle">
+              A little memory
+             </div>
+
+              <h2>
+              Tentang Kita 📸
+             </h2>
+
+              <div class="photo-slider">
+
+                  <button
+                      class="photo-button left"
+                     onclick="previousPhoto()">
+                     ‹
+                 </button>
+
+                 <div class="photo-box">
+
+                     <img
+                       id="galleryPhoto"
+                      src=""
+                     alt="Foto kenangan"
+                      >
+
+                  </div>
+
+                 <button
+                     class="photo-button right"
+                    onclick="nextPhoto()">
+                    ›
+                   </button>
+
+            </div>
+
+            <div
+               class="photo-counter"
+                 id="photoCounter">
+             </div>
+
+             <p>
+             <span class="name">
+            TULIS CERITA KALIAN DI SINI
+              </span>
+      </p>
+
+    <button onclick="nextPage()">
+        Lanjut 💌
+    </button>
+
+</section>
+
+
+
+        <!-- =================================================
+             PAGE 4 - SURAT
+        ================================================== -->
+
+        <section class="page">
+
+            <div class="subtitle">
+                A letter for you
+            </div>
+
+            <h2>
+                Untuk Kamu 💌
+            </h2>
+
+
+            <div class="letter">
+
+                <p>
+                    Hai sayang,
+                </p>
+
+
+                <p>
+                    TULIS SURAT ULANG TAHUN KAMU DI SINI.
+                </p>
+
+
+                <p>
+                    Kamu bisa menceritakan bagaimana awal
+                    kalian bertemu, hal yang paling kamu
+                    suka dari dia, kenangan yang paling
+                    berkesan, atau hal-hal kecil yang
+                    membuat kamu bersyukur sudah mengenalnya.
+                </p>
+
+
+                <p>
+                    TULIS PESAN PRIBADI KAMU DI SINI.
+                </p>
+
+
+                <p>
+                    Semoga apa pun yang kamu impikan,
+                    perlahan bisa menjadi kenyataan.
+                    Semoga kamu selalu dikelilingi
+                    hal-hal baik dan orang-orang yang
+                    menyayangi kamu.
+                </p>
+
+
+                <div class="signature">
+
+                    With love,
+
+                    <br>
+
+                    <span id="namaKamu">
+                        NAMA KAMU
+                    </span>
+
+                    ❤️
+
+                </div>
+
+            </div>
+
+
+            <button onclick="nextPage()">
+                Masih ada satu lagi 💕
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 5
+        ================================================== -->
+
+        <section class="page">
+
+            <div class="big-heart">
+                💖
+            </div>
+
+            <div class="subtitle">
+                My wish for you
+            </div>
+
+            <h2>
+                Semoga kamu selalu bahagia.
+            </h2>
+
+
+            <p>
+                Semoga di usia yang baru ini,
+                kamu semakin dekat dengan semua
+                impian yang kamu perjuangkan.
+            </p>
+
+
+            <p>
+                Kalau suatu hari semuanya terasa berat,
+                semoga kamu selalu ingat bahwa kamu
+                tidak harus menghadapi semuanya sendirian.
+            </p>
+
+
+            <p>
+                Aku akan selalu senang melihat kamu
+                tumbuh, berkembang, dan menjadi versi
+                terbaik dari diri kamu.
+            </p>
+
+
+            <button onclick="nextPage()">
+                Pesan terakhir ❤️
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PAGE 6 - FINAL
+        ================================================== -->
+
+        <section class="page">
+
+            <div class="big-heart">
+                💗
+            </div>
+
+
+            <div class="subtitle">
+                One last thing
+            </div>
+
+
+            <h1>
+
+                Selamat ulang tahun,
+
+                <br>
+
+                <span class="name" id="nama3">
+                    NAMA DIA
+                </span>
+
+            </h1>
+
+
+            <p class="final-message">
+
+                Terima kasih sudah hadir
+                di hidupku.
+
+                <br><br>
+
+                Terima kasih untuk setiap tawa,
+                setiap cerita,
+                setiap perhatian,
+                dan setiap momen kecil
+                yang sudah kita lewati bersama.
+
+                <br><br>
+
+                Semoga kita masih punya
+                banyak sekali cerita
+                untuk ditulis bersama. ❤️
+
+            </p>
+
+
+            <div class="love">
+
+                ♡ 💗 ♡ 💙 ♡
+
+            </div>
+
+
+            <button onclick="restart()">
+
+                Ulangi dari awal ↻
+
+            </button>
+
+        </section>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* ==========================================================
+   GALLERY FOTO
+========================================================== */
+
+const photos = [
+
+    "foto1.jpeg",
+    "foto2.jpeg",
+    "foto3.jpg",
+    "foto4.jpg",
+    "foto5.jpg"
+
+];
+
+let currentPhoto = 0;
+
+const galleryPhoto =
+    document.getElementById("galleryPhoto");
+
+const photoCounter =
+    document.getElementById("photoCounter");
+
+
+function showPhoto() {
+
+    galleryPhoto.style.opacity = 0;
+
+    setTimeout(() => {
+
+        galleryPhoto.src =
+            photos[currentPhoto];
+
+        galleryPhoto.style.opacity = 1;
+
+    }, 200);
+
+
+    photoCounter.textContent =
+        `${currentPhoto + 1} / ${photos.length}`;
+
+}
+
+
+function nextPhoto() {
+
+    currentPhoto++;
+
+    if(currentPhoto >= photos.length) {
+
+        currentPhoto = 0;
+
+    }
+
+    showPhoto();
+
+}
+
+function startExperience() {
+
+    const music =
+        document.getElementById("bgMusic");
+
+    music.volume = 0.4;
+
+    music.play();
+
+    nextPage();
+}
+
+function previousPhoto() {
+
+    currentPhoto--;
+
+    if(currentPhoto < 0) {
+
+        currentPhoto =
+            photos.length - 1;
+
+    }
+
+    showPhoto();
+
+}
+
+
+showPhoto();
+
+/* ==========================================================
+   EDIT NAMA DI SINI
+========================================================== */
+
+const namaDia = "JEJE";
+
+const namaKamu = "RAFI STECU";
+
+
+/* ==========================================================
+   MASUKKAN NAMA KE WEBSITE
+========================================================== */
+
+document.getElementById("nama1").textContent =
+    namaDia;
+
+document.getElementById("nama2").textContent =
+    namaDia;
+
+document.getElementById("nama3").textContent =
+    namaDia;
+
+document.getElementById("namaKamu").textContent =
+    namaKamu;
+
+
+/* ==========================================================
+   PAGE SYSTEM
+========================================================== */
+
+const pages =
+    document.querySelectorAll(".page");
+
+let currentPage = 0;
+
+
+/* ==========================================================
+   PROGRESS DOT
+========================================================== */
+
+const progress =
+    document.getElementById("progress");
+
+
+pages.forEach((page, index) => {
+
+    const dot =
+        document.createElement("div");
+
+    dot.className = "dot";
+
+    if(index === 0) {
+        dot.classList.add("active");
+    }
+
+    progress.appendChild(dot);
+
+});
+
+
+function updateProgress() {
+
+    const dots =
+        document.querySelectorAll(".dot");
+
+    dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === currentPage
+        );
+
+    });
+
+}
+
+
+/* ==========================================================
+   NEXT PAGE
+========================================================== */
+
+function nextPage() {
+
+    if(currentPage < pages.length - 1) {
+
+        pages[currentPage]
+            .classList.remove("active");
+
+        currentPage++;
+
+        pages[currentPage]
+            .classList.add("active");
+
+        updateProgress();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESTART
+========================================================== */
+
+function restart() {
+
+    pages[currentPage]
+        .classList.remove("active");
+
+    currentPage = 0;
+
+    pages[currentPage]
+        .classList.add("active");
+
+    updateProgress();
+
+}
+
+
+/* ==========================================================
+   FLOATING HEARTS
+========================================================== */
+
+const heartContainer =
+    document.getElementById("hearts");
+
+
+const heartSymbols = [
+    "💗",
+    "💕",
+    "💖",
+    "💘",
+    "💙",
+    "♡"
+];
+
+
+for(let i = 0; i < 30; i++) {
+
+    const heart =
+        document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.textContent =
+        heartSymbols[
+            Math.floor(
+                Math.random() *
+                heartSymbols.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+
+    heart.style.fontSize =
+        (14 + Math.random() * 25) + "px";
+
+
+    heart.style.animationDuration =
+        (6 + Math.random() * 8) + "s";
+
+
+    heart.style.animationDelay =
+        (Math.random() * 10) + "s";
+
+
+    heartContainer.appendChild(heart);
+
+}
+
+
+</script>
+
+</body>
+</html>
