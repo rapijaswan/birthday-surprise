@@ -1,128 +1,1531 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Untuk Kamu ❤️</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-        html {
-            scroll-behavior: smooth;
-        }
+<title>Untuk Kamu ❤️</title>
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(
-                135deg,
-                #ff4f9a,
-                #ff8fc4,
-                #f5b5dc,
-                #75bfff
-            );
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
 
-.video-box {
-    width: min(700px, 100%);
-    margin: 30px auto;
+<style>
+
+.back-to-gallery {
+    position: fixed;
+
+    /* Selalu berada di tengah tinggi layar */
+    top: 50%;
+    left: 25px;
+    transform: translateY(-50%);
+
+    z-index: 1005;
+
+    padding: 12px 20px;
     border-radius: 25px;
-    overflow: hidden;
-    background: rgba(0,0,0,0.2);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(30,15,40,0.75);
+
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+    transition: all 0.25s ease;
 }
 
-.video-box video {
-    width: 100%;
-    display: block;
+.back-to-gallery:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-50%) scale(1.05);
 }
-       
-        
-        /* =========================
-   PHOTO SLIDER
-========================= */
 
-.photo-slider {
+@media (max-width: 600px) {
+    .back-to-gallery {
+        left: 15px;
+        top: auto;
+        bottom: 25px;
+        transform: none;
+
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .back-to-gallery:hover {
+        transform: scale(1.05);
+    }
+}
+
+
+/* =========================================================
+   INTERACTIVE MEMORY GALLERY
+========================================================= */
+
+.gallery-intro {
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+.memory-gallery {
     width: 100%;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.gallery-photo-area {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
 }
 
-.photo-box {
-    width: min(600px, 80%);
-    height: 350px;
+.gallery-photo-card {
+    position: relative;
+    width: min(600px, 80vw);
+    height: 400px;
 
     border-radius: 25px;
-
-    background: rgba(255,255,255,0.08);
-
-    border: 2px solid rgba(255,255,255,0.4);
-
     overflow: hidden;
 
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 20px 50px rgba(70,30,100,0.25);
+
+    cursor: pointer;
+
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.photo-box img {
+.gallery-photo-card:hover {
+    transform: scale(1.015);
+
+    box-shadow:
+        0 25px 60px rgba(70,30,100,0.35);
+}
+
+.gallery-photo-card img {
     width: 100%;
     height: 100%;
 
-    /*
-       CONTAIN = FOTO TIDAK TERPOTONG
-    */
     object-fit: contain;
 
     display: block;
 
-    transition: opacity 0.4s ease;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 }
 
+.photo-overlay {
+    position: absolute;
 
-/* Tombol kiri dan kanan */
+    left: 0;
+    right: 0;
+    bottom: 0;
 
-.photo-button {
+    padding: 20px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,0,0,0.55)
+        );
+
+    color: white;
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+}
+
+.gallery-photo-card:hover .photo-overlay {
+    opacity: 1;
+}
+
+.gallery-nav {
+    width: 50px;
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    background: rgba(255,255,255,0.18);
+
+    color: inherit;
+
+    font-size: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.gallery-nav:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.35);
+}
+
+.memory-caption {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.photo-counter {
+    font-size: 13px;
+    opacity: 0.65;
+    margin-bottom: 8px;
+}
+
+.photo-caption {
+    min-height: 45px;
+
+    max-width: 600px;
+
+    margin: 0 auto 15px;
+
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.love-photo-button {
     width: 50px;
     height: 50px;
 
     padding: 0;
+    margin: 0 auto;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.love-photo-button:hover {
+    transform: scale(1.15);
+}
+
+.gallery-ending {
+    margin-top: 30px;
+
+    font-size: 14px;
+
+    opacity: 0.75;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   FULLSCREEN PHOTO
+========================================================= */
+
+.photo-fullscreen {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(20,10,30,0.94);
+
+    padding: 30px;
+
+    backdrop-filter: blur(10px);
+}
+
+.photo-fullscreen.active {
+    display: flex;
+}
+
+.photo-fullscreen img {
+    max-width: 90vw;
+    max-height: 78vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.5);
+}
+
+.fullscreen-close {
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    width: 45px;
+    height: 45px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    font-size: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    cursor: pointer;
+}
+
+.fullscreen-nav {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 55px;
+    height: 55px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    font-size: 38px;
+
+    color: white;
+
+    background: rgba(255,255,255,0.15);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.fullscreen-prev {
+    left: 25px;
+}
+
+.fullscreen-next {
+    right: 25px;
+}
+
+.fullscreen-caption {
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(700px, 80vw);
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   HEART EFFECT
+========================================================= */
+
+.love-pop {
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 10000;
+
+    font-size: 25px;
+
+    animation:
+        loveFloat 1s ease-out forwards;
+}
+
+@keyframes loveFloat {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(0.5);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translateY(-100px)
+            scale(1.4);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .gallery-photo-area {
+        gap: 6px;
+    }
+
+    .gallery-photo-card {
+        width: 75vw;
+        height: 300px;
+    }
+
+    .gallery-nav {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+
+        font-size: 28px;
+    }
+
+    .photo-caption {
+        font-size: 15px;
+    }
+
+    .photo-fullscreen {
+        padding: 15px;
+    }
+
+    .fullscreen-prev {
+        left: 10px;
+    }
+
+    .fullscreen-next {
+        right: 10px;
+    }
+
+}
+
+
+.final-video {
+    width: 100%;
+    max-width: 700px;
+    margin: 25px auto 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.25);
+}
+
+.final-video video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+}
+
+/* =========================================
+   FINAL SURPRISE
+========================================= */
+
+.final-surprise {
+    margin-top: 50px;
+    text-align: center;
+}
+
+
+.surprise-teaser {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.surprise-small {
+    font-size: 15px;
+    opacity: 0.8;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+
+#giftButton {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        135deg,
+        #ff69a8,
+        #ff9bc5
+    );
+
+    color: white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(255, 80, 150, 0.3);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+#giftButton:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(255, 80, 150, 0.4);
+}
+
+
+/* HADIAH */
+
+.final-gift {
+    margin-top: 35px;
+
+    padding: 30px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    backdrop-filter:
+        blur(12px);
+
+    animation:
+        giftAppear 0.8s ease;
+}
+
+
+.gift-icon {
+    font-size: 70px;
+
+    animation:
+        giftBounce 1s ease;
+}
+
+
+.final-gift h2 {
+    margin-top: 15px;
+}
+
+
+.final-gift p {
+    line-height: 1.8;
+}
+
+
+.gift-ending {
+    margin-top: 25px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+@keyframes giftAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+@keyframes giftBounce {
+
+    0% {
+        transform: scale(0.5);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
+
+.music-player {
+
+    width: min(600px, 100%);
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.4);
+
+    backdrop-filter:
+        blur(15px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(80,30,120,0.25);
+
+}
+
+
+/* MUSIC INFO */
+
+.music-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.music-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 27px;
+
+    background:
+        rgba(255,255,255,0.2);
+}
+
+
+.music-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+
+.music-artist {
+
+    font-size: 13px;
+
+    opacity: 0.75;
+
+    margin-top: 4px;
+
+}
+
+
+/* CONTROLS */
+
+.music-controls {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.music-play {
+
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+}
+
+
+/* PROGRESS */
+
+.music-progress-container {
+
+    flex: 1;
+
+    height: 7px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.25);
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+}
+
+
+.music-progress {
+
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff4f9a,
+            #75bfff
+        );
+
+    transition:
+        width 0.1s linear;
+
+}
+
+
+/* TIME */
+
+.music-time {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+
+    font-size: 12px;
+
+    opacity: 0.7;
+
+}
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: 'Segoe UI', sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff4f9a,
+            #ff8fc4,
+            #f5b5dc,
+            #75bfff
+        );
+
+    color: white;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: -1;
+}
+
+.circle {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    animation:
+        move 12s infinite alternate
+        ease-in-out;
+}
+
+.circle:nth-child(1) {
+
+    width: 300px;
+    height: 300px;
+
+    top: -100px;
+    left: -100px;
+}
+
+.circle:nth-child(2) {
+
+    width: 400px;
+    height: 400px;
+
+    right: -150px;
+    top: 20%;
+
+    animation-delay: 2s;
+}
+
+.circle:nth-child(3) {
+
+    width: 250px;
+    height: 250px;
+
+    bottom: -100px;
+    left: 30%;
+
+    animation-delay: 4s;
+}
+
+
+@keyframes move {
+
+    from {
+
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    to {
+
+        transform:
+            translate(50px, -30px)
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.heart {
+
+    position: fixed;
+
+    bottom: -50px;
+
+    font-size: 20px;
+
+    animation:
+        floatHeart linear infinite;
+
+    opacity: 0.7;
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   LOCK SCREEN
+========================================================= */
+
+#lockScreen {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+
+.lock-card {
+
+    width: min(650px, 100%);
+
+    padding: 60px 35px;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.45);
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 30px 80px
+        rgba(90,20,80,0.3);
+
+    animation:
+        lockAppear 1s ease;
+}
+
+
+@keyframes lockAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.9)
+            translateY(30px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+.lock-icon {
+
+    font-size: 80px;
+
+    margin-bottom: 25px;
+
+    animation:
+        heartbeat 1.5s infinite;
+}
+
+
+.lock-small {
+
+    font-size: 13px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0.9;
+
+    margin-bottom: 20px;
+}
+
+
+.lock-card h1 {
+
+    font-size:
+        clamp(38px, 8vw, 70px);
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+
+    text-shadow:
+        0 5px 20px
+        rgba(100,20,80,0.3);
+}
+
+
+.lock-card p {
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 25px;
+}
+
+
+.lock-date {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin: 25px 0;
+
+    text-shadow:
+        0 3px 15px
+        rgba(255,30,130,0.5);
+}
+
+
+.countdown {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 30px 0;
+}
+
+
+.time-box {
+
+    min-width: 70px;
+
+    padding: 15px 8px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.14);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+}
+
+
+.time-number {
+
+    display: block;
+
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+
+.time-label {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.8;
+
+    margin-top: 4px;
+}
+
+
+.lock-message {
+
+    font-size: 14px;
+
+    opacity: 0.75;
+
+    margin-top: 25px;
+}
+
+
+/* =========================================================
+   MAIN WEBSITE
+========================================================= */
+
+#mainWebsite {
+
+    display: none;
+}
+
+
+.container {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px 20px;
+}
+
+
+.card {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    min-height: 650px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.4);
+
+    border-radius: 35px;
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 30px 80px
+        rgba(90,20,80,0.3);
+
+    padding: 50px 40px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+    display: none;
+
+    width: 100%;
+
+    animation:
+        pageIn 0.8s ease;
+}
+
+
+.page.active {
+
+    display: block;
+}
+
+
+@keyframes pageIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.subtitle {
+
+    font-size: 14px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 20px;
+
+    opacity: 0.9;
+}
+
+
+h1 {
+
+    font-size:
+        clamp(45px, 8vw, 85px);
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 5px 20px
+        rgba(100,20,80,0.3);
+}
+
+
+h2 {
+
+    font-size:
+        clamp(30px, 5vw, 55px);
+
+    margin-bottom: 25px;
+}
+
+
+p {
+
+    max-width: 700px;
+
+    margin:
+        0 auto 25px;
+
+    font-size: 17px;
+
+    line-height: 1.9;
+}
+
+
+.name {
+
+    font-weight: 800;
+
+    color: white;
+
+    text-shadow:
+        0 3px 15px
+        rgba(255,30,130,0.6);
+}
+
+
+/* =========================================================
+   HEART
+========================================================= */
+
+.big-heart {
+
+    font-size: 85px;
+
+    margin-bottom: 25px;
+
+    display: inline-block;
+
+    animation:
+        heartbeat 1.4s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0%,100% {
+
+        transform:
+            scale(1);
+    }
+
+    15% {
+
+        transform:
+            scale(1.2);
+    }
+
+    30% {
+
+        transform:
+            scale(1);
+    }
+
+    45% {
+
+        transform:
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button {
+
+    border: none;
+
+    padding: 15px 32px;
+
+    border-radius: 50px;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3f91,
+            #7bbcff
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(80,30,120,0.3);
+
+    transition:
+        all 0.3s ease;
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 15px 40px
+        rgba(80,30,120,0.4);
+}
+
+
+/* =========================================================
+   PHOTO SLIDER
+========================================================= */
+
+.photo-slider {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+.photo-box {
+
+    width:
+        min(600px, 80%);
+
+    height: 350px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    border:
+        2px solid
+        rgba(255,255,255,0.4);
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.photo-box img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.photo-button {
+
+    width: 50px;
+
+    height: 50px;
+
+    padding: 0;
+
     margin: 0;
 
     border-radius: 50%;
 
     font-size: 35px;
+
     line-height: 50px;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
-    background: rgba(255,255,255,0.2);
+    background:
+        rgba(255,255,255,0.2);
 
-    border: 1px solid rgba(255,255,255,0.5);
+    border:
+        1px solid
+        rgba(255,255,255,0.5);
 
     flex-shrink: 0;
 }
 
+
 .photo-button:hover {
-    background: rgba(255,255,255,0.35);
+
+    background:
+        rgba(255,255,255,0.35);
 }
 
 
-/* Nomor foto */
-
 .photo-counter {
+
     margin-top: 15px;
 
     font-size: 14px;
@@ -133,604 +1536,697 @@
 }
 
 
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-box {
+
+    width:
+        min(700px, 100%);
+
+    margin: 30px auto;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    background:
+        rgba(0,0,0,0.2);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.25);
+}
+
+
+.video-box video {
+
+    width: 100%;
+
+    display: block;
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter {
+
+    max-width: 700px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    text-align: left;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.3);
+}
+
+
+.letter p {
+
+    margin-bottom: 18px;
+}
+
+
+.signature {
+
+    text-align: right;
+
+    margin-top: 30px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress {
+
+    position: fixed;
+
+    top: 20px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 7px;
+
+    z-index: 10;
+}
+
+
+.dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.4);
+
+    transition: 0.3s;
+}
+
+
+.dot.active {
+
+    width: 25px;
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final-message {
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    line-height: 1.8;
+}
+
+
+.love {
+
+    font-size: 35px;
+
+    margin-top: 30px;
+
+    letter-spacing: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:600px) {
 
+    .lock-card {
+
+        padding:
+            45px 20px;
+    }
+
+
+    .countdown {
+
+        gap: 6px;
+    }
+
+
+    .time-box {
+
+        min-width: 58px;
+
+        padding: 12px 5px;
+    }
+
+
+    .time-number {
+
+        font-size: 22px;
+    }
+
+
+    .time-label {
+
+        font-size: 8px;
+    }
+
+
+    .card {
+
+        min-height: 600px;
+
+        padding:
+            40px 20px;
+
+        border-radius: 25px;
+    }
+
+
+    p {
+
+        font-size: 15px;
+
+        line-height: 1.8;
+    }
+
+
     .photo-slider {
+
         gap: 5px;
     }
 
+
     .photo-box {
+
         width: 75%;
+
         height: 250px;
     }
 
+
     .photo-button {
+
         width: 40px;
+
         height: 40px;
 
         font-size: 28px;
     }
 
+
+    .letter {
+
+        padding: 22px;
+    }
+
+
+    button {
+
+        padding:
+            13px 25px;
+    }
+
 }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+</style>
 
-        .background {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.12);
-            animation: move 12s infinite alternate ease-in-out;
-        }
-
-        .circle:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -100px;
-            left: -100px;
-        }
-
-        .circle:nth-child(2) {
-            width: 400px;
-            height: 400px;
-            right: -150px;
-            top: 20%;
-            animation-delay: 2s;
-        }
-
-        .circle:nth-child(3) {
-            width: 250px;
-            height: 250px;
-            bottom: -100px;
-            left: 30%;
-            animation-delay: 4s;
-        }
-
-        @keyframes move {
-            from {
-                transform: translate(0, 0) scale(1);
-            }
-
-            to {
-                transform: translate(50px, -30px) scale(1.15);
-            }
-        }
-
-        /* =========================
-           FLOATING HEARTS
-        ========================= */
-
-        .heart {
-            position: fixed;
-            bottom: -50px;
-            font-size: 20px;
-            animation: floatHeart linear infinite;
-            opacity: 0.7;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @keyframes floatHeart {
-
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-
-            15% {
-                opacity: 0.8;
-            }
-
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* =========================
-           MAIN CONTAINER
-        ========================= */
-
-        .container {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 20px;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 900px;
-            min-height: 650px;
-
-            background: rgba(255,255,255,0.15);
-
-            border: 1px solid rgba(255,255,255,0.4);
-
-            border-radius: 35px;
-
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-
-            box-shadow:
-                0 30px 80px rgba(90,20,80,0.3);
-
-            padding: 50px 40px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* =========================
-           PAGE
-        ========================= */
-
-        .page {
-            display: none;
-            width: 100%;
-            animation: pageIn 0.8s ease;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes pageIn {
-
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-        /* =========================
-           TEXT
-        ========================= */
-
-        .subtitle {
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        h1 {
-            font-size: clamp(45px, 8vw, 85px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-
-            text-shadow:
-                0 5px 20px rgba(100,20,80,0.3);
-        }
-
-        h2 {
-            font-size: clamp(30px, 5vw, 55px);
-            margin-bottom: 25px;
-        }
-
-        p {
-            max-width: 700px;
-            margin: 0 auto 25px;
-
-            font-size: 17px;
-            line-height: 1.9;
-        }
-
-        .name {
-            font-weight: 800;
-            color: white;
-
-            text-shadow:
-                0 3px 15px rgba(255,30,130,0.6);
-        }
-
-        /* =========================
-           HEART
-        ========================= */
-
-        .big-heart {
-            font-size: 85px;
-            margin-bottom: 25px;
-
-            display: inline-block;
-
-            animation: heartbeat 1.4s infinite;
-        }
-
-        @keyframes heartbeat {
-
-            0%,100% {
-                transform: scale(1);
-            }
-
-            15% {
-                transform: scale(1.2);
-            }
-
-            30% {
-                transform: scale(1);
-            }
-
-            45% {
-                transform: scale(1.15);
-            }
-
-        }
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        button {
-            border: none;
-
-            padding: 15px 32px;
-
-            border-radius: 50px;
-
-            color: white;
-
-            font-size: 15px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            margin: 8px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff3f91,
-                    #7bbcff
-                );
-
-            box-shadow:
-                0 10px 30px rgba(80,30,120,0.3);
-
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            transform: translateY(-4px) scale(1.03);
-
-            box-shadow:
-                0 15px 40px rgba(80,30,120,0.4);
-        }
-
-        /* =========================
-           PHOTO
-        ========================= */
-
-        .photo-box {
-            width: min(550px, 100%);
-            height: 330px;
-
-            margin: 30px auto;
-
-            border-radius: 25px;
-
-            border: 2px dashed rgba(255,255,255,0.7);
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            background: rgba(255,255,255,0.08);
-
-            overflow: hidden;
-
-            position: relative;
-        }
-
-        .photo-box img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: contain;
-
-            display: block;
-        }
-
-        .photo-placeholder {
-            opacity: 0.8;
-            font-size: 16px;
-        }
-
-        /* =========================
-           LETTER
-        ========================= */
-
-        .letter {
-            max-width: 700px;
-
-            margin: auto;
-
-            padding: 35px;
-
-            border-radius: 25px;
-
-            text-align: left;
-
-            background: rgba(255,255,255,0.12);
-
-            border:
-                1px solid rgba(255,255,255,0.3);
-        }
-
-        .letter p {
-            margin-bottom: 18px;
-        }
-
-        .signature {
-            text-align: right;
-
-            margin-top: 30px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-        }
-
-        /* =========================
-           PROGRESS DOT
-        ========================= */
-
-        .progress {
-            position: fixed;
-
-            top: 20px;
-
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            display: flex;
-
-            gap: 7px;
-
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-
-            border-radius: 50%;
-
-            background: rgba(255,255,255,0.4);
-
-            transition: 0.3s;
-        }
-
-        .dot.active {
-            width: 25px;
-
-            border-radius: 10px;
-
-            background: white;
-        }
-
-        /* =========================
-           FINAL
-        ========================= */
-
-        .final-message {
-            font-size: 22px;
-
-            font-weight: 600;
-
-            line-height: 1.8;
-        }
-
-        .love {
-            font-size: 35px;
-
-            margin-top: 30px;
-
-            letter-spacing: 10px;
-        }
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media(max-width:600px) {
-
-            .card {
-                min-height: 600px;
-
-                padding:
-                    40px 20px;
-
-                border-radius: 25px;
-            }
-
-            p {
-                font-size: 15px;
-                line-height: 1.8;
-            }
-
-            .photo-box {
-                height: 240px;
-            }
-
-            .letter {
-                padding: 22px;
-            }
-
-            button {
-                padding:
-                    13px 25px;
-            }
-
-        }
-
-    </style>
 </head>
 
 
 <body>
 
+<div class="music-player">
 
-<audio id="bgMusic" loop>
-    <source src="lagu.mp3" type="audio/mpeg">
-</audio>
+    <div class="music-info">
 
-<!-- =====================================================
+        <div class="music-icon">
+            🎵
+        </div>
+
+        <div>
+
+            <div class="music-title">
+                Our Song
+            </div>
+
+            <div class="music-artist">
+                Lagu untuk kamu ❤️
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="music-controls">
+
+        <button
+            class="music-play"
+            id="playButton"
+            onclick="toggleMusic()">
+
+            ▶
+
+        </button>
+
+
+        <div class="music-progress-container">
+
+            <div
+                class="music-progress"
+                id="musicProgress">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="music-time">
+
+        <span id="currentTime">
+            0:00
+        </span>
+
+        <span id="duration">
+            0:00
+        </span>
+
+    </div>
+
+
+    <audio id="bgMusic"
+            loop>
+
+
+        <source
+            src="lagu.mp3"
+            type="audio/mpeg">
+
+    </audio>
+
+</div>
+
+
+<!-- =========================================================
      BACKGROUND
-===================================================== -->
+========================================================= -->
 
 <div class="background">
 
     <div class="circle"></div>
+
     <div class="circle"></div>
+
     <div class="circle"></div>
 
 </div>
 
 
-<!-- =====================================================
+<!-- =========================================================
      FLOATING HEARTS
-===================================================== -->
+========================================================= -->
 
 <div id="hearts"></div>
 
 
-<!-- =====================================================
-     PROGRESS
-===================================================== -->
 
-<div class="progress" id="progress"></div>
+<!-- =========================================================
+     🔒 LOCK SCREEN
+========================================================= -->
 
+<div id="lockScreen">
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+    <div class="lock-card">
 
-<div class="container">
-
-    <div class="card">
+        <div class="lock-icon">
+            🔒
+        </div>
 
 
-        <!-- =================================================
-             PAGE 1
-        ================================================== -->
-
-        <section class="page active">
-
-            <div class="big-heart">
-                💗
-            </div>
-
-            <div class="subtitle">
-                Ada sesuatu untuk kamu sayang...
-            </div>
-
-            <h1>
-                Hai,
-                <span class="name" id="nama1">
-                    NAMA DIA
-                </span>
-            </h1>
-
-            <p>
-                Ada satu hari yang menurutku spesial,
-                karena di hari itu seseorang yang sangat
-                berarti buat aku lahir ke dunia.
-            </p>
-
-            <button onclick="startExperience()">
-                Buka 💕
-            </button>
-
-        </section>
+        <div class="lock-small">
+            A little surprise for Kinderjoy
+        </div>
 
 
-
-        <!-- =================================================
-             PAGE 2
-        ================================================== -->
-
-        <section class="page">
-
-            <div class="subtitle">
-                15 September 2026
-            </div>
-
-            <h1>
-                Happy Birthday
-            </h1>
-
-            <h2>
-                <span class="name" id="nama2">
-                    NAMA DIA
-                </span>
-                🎂
-            </h2>
-
-            <p>
-                Selamat ulang tahun, sayang.
-            </p>
-
-            <p>
-                Hari ini bukan cuma tentang bertambahnya
-                usia kamu, tapi juga tentang semua cerita,
-                perjuangan, dan hal indah yang sudah kamu
-                lewati sampai sejauh ini.
-            </p>
-
-            <button onclick="nextPage()">
-                Lanjut 💗
-            </button>
-
-        </section>
+        <h1>
+            Shhh... 🤫
+        </h1>
 
 
-        <section class="page">
+        <p>
+
+            Aku sudah menyiapkan sesuatu
+            buat sayang.
+
+            <br>
+
+            Tapi sayang harus menunggu
+            sampai waktunya hitung mundurnya selesai. ❤️
+
+        </p>
+
+
+        <div class="lock-date">
+
+            15 September 2026
+
+        </div>
+
+
+        <div class="countdown">
+
+    <div class="time-box">
+
+        <span
+            class="time-number"
+            id="days">
+            00
+        </span>
+
+        <span class="time-label">
+            HARI
+        </span>
+
+    </div>
+
+
+    <div class="time-box">
+
+        <span
+            class="time-number"
+            id="hours">
+            00
+        </span>
+
+        <span class="time-label">
+            JAM
+        </span>
+
+    </div>
+
+
+    <div class="time-box">
+
+        <span
+            class="time-number"
+            id="minutes">
+            00
+        </span>
+
+        <span class="time-label">
+            MENIT
+        </span>
+
+    </div>
+
+
+    <div class="time-box">
+
+        <span
+            class="time-number"
+            id="seconds">
+            00
+        </span>
+
+        <span class="time-label">
+            DETIK
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- TOMBOL DILUAR COUNTDOWN -->
+
+<button
+    id="openSurpriseButton"
+    onclick="openSurprise()"
+    style="display:none;">
+
+    Buka Surprise 💌
+
+</button>
+
+
+<p class="lock-message">
+
+    💗 Come back on your birthday 💗
+
+</p>
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN WEBSITE
+     SEMUA ISI LAMA ADA DI DALAM SINI
+========================================================= -->
+
+<div id="mainWebsite">
+
+
+    <!-- =====================================================
+         PROGRESS
+    ====================================================== -->
+
+    <div
+        class="progress"
+        id="progress">
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN CONTAINER
+    ====================================================== -->
+
+    <div class="container">
+
+        <div class="card">
+
+
+            <!-- =================================================
+                 PAGE 1
+            ================================================== -->
+
+            <section class="page active">
+
+                <div class="big-heart">
+                    💗
+                </div>
+
+
+                <div class="subtitle">
+                    Ada sesuatu untuk kamu...
+                </div>
+
+
+                <h1>
+
+                    Hai,
+
+                    <span
+                        class="name"
+                        id="nama1">
+
+                        NAMA DIA
+
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Hari ini adalah hari spesial bagi seseorang
+                    yang sangatt cantik, dan itu berarti hari ini juga
+                    menjadi spesial untuk aku yang sangat mencintai seseorang
+                    yang amat cantik ini. 
+
+                </p>
+
+
+                <button onclick="startExperience()">
+
+                    Buka 💕
+
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PAGE 2
+            ================================================== -->
+
+            <section class="page">
+
+                <div class="subtitle">
+
+                    15 September 2026
+
+                </div>
+
+
+                <h1>
+
+                    Happy Birthday
+
+                </h1>
+
+
+                <h2>
+
+                    <span
+                        class="name"
+                        id="nama2">
+
+                        NAMA DIA
+
+                    </span>
+
+                    🎂
+
+                </h2>
+
+
+                <p>
+
+                    Selamat ulang tahun, sayang.
+
+                </p>
+
+
+                <p>
+
+                    Hari ini bukan cuma tentang bertambahnya
+                    usia kamu, tapi juga tentang semua cerita,
+                    perjuangan, dan hal indah yang sudah kamu
+                    lewati sampai sejauh ini.
+
+                </p>
+
+
+                <button onclick="nextPage()">
+
+                    Lanjut 💗
+
+                </button>
+
+            </section>
+
+
+           
+<!-- =================================================
+     PAGE 3 - FOTO
+================================================== -->
+<section class="page">
 
     <div class="subtitle">
-        A little surprise 🎬
+        A little memory 📸
     </div>
 
     <h2>
-        Ada Video Untuk Kamu ❤️
+        Tentang Kita 💗
     </h2>
 
-    <div class="video-box">
+    <p class="gallery-intro">
+        Beberapa momen kecil yang selalu ingin aku simpan.
+    </p>
 
-        <video controls playsinline>
-            <source src="video-kenangan.mp4" type="video/mp4">
-            Browser kamu tidak mendukung video.
-        </video>
+    <div class="memory-gallery">
+
+        <div class="gallery-photo-area">
+
+            <button
+                class="gallery-nav"
+                onclick="previousPhoto()">
+                ‹
+            </button>
+
+            <div
+                class="gallery-photo-card"
+                onclick="openPhotoFullscreen()">
+
+                <img
+                    id="galleryPhoto"
+                    src=""
+                    alt="Foto kenangan">
+
+                <div class="photo-overlay">
+                    <span>🔍 Klik untuk melihat lebih besar</span>
+                </div>
+
+            </div>
+
+            <button
+                class="gallery-nav"
+                onclick="nextPhoto()">
+                ›
+            </button>
+
+        </div>
+
+        <div class="memory-caption">
+
+            <div
+                class="photo-counter"
+                id="photoCounter">
+            </div>
+
+            <p
+                class="photo-caption"
+                id="photoCaption">
+            </p>
+
+            <button
+                class="love-photo-button"
+                onclick="sendLove(event)">
+                ♡
+            </button>
+
+        </div>
 
     </div>
 
-    <p>
-        TULIS PESAN UNTUK VIDEO DI SINI
+    <p class="gallery-ending">
+        Dan ternyata... masih banyak cerita yang ingin aku buat sama kamu. ❤️
     </p>
 
     <button onclick="nextPage()">
@@ -739,254 +2235,408 @@
 
 </section>
 
-        <!-- =================================================
-            PAGE 3 - FOTO KENANGAN
-        ================================================== -->
 
-        <section class="page">
+<!-- =================================================
+     FULLSCREEN PHOTO
+================================================== -->
 
-            <div class="subtitle">
-              A little memory
-             </div>
+<div
+    id="photoFullscreen"
+    class="photo-fullscreen"
+    onclick="closePhotoFullscreen(event)">
 
-              <h2>
-              Tentang Kita 📸
-             </h2>
-
-              <div class="photo-slider">
-
-                  <button
-                      class="photo-button left"
-                     onclick="previousPhoto()">
-                     ‹
-                 </button>
-
-                 <div class="photo-box">
-
-                     <img
-                       id="galleryPhoto"
-                      src=""
-                     alt="Foto kenangan"
-                      >
-
-                  </div>
-
-                 <button
-                     class="photo-button right"
-                    onclick="nextPhoto()">
-                    ›
-                   </button>
-
-            </div>
-
-            <div
-               class="photo-counter"
-                 id="photoCounter">
-             </div>
-
-             <p>
-             <span class="name">
-            TULIS CERITA KALIAN DI SINI
-              </span>
-      </p>
-
-    <button onclick="nextPage()">
-        Lanjut 💌
+    <button
+        class="fullscreen-close"
+        onclick="closePhotoFullscreen(event)">
+        ×
     </button>
 
-</section>
+    <img
+        id="fullscreenPhoto"
+        src=""
+        alt="Foto kenangan fullscreen">
+
+    <div
+        id="fullscreenCaption"
+        class="fullscreen-caption">
+    </div>
+
+    <button
+        class="fullscreen-nav fullscreen-prev"
+        onclick="fullscreenPrevious(event)">
+        ‹
+    </button>
+
+    <button
+        class="fullscreen-nav fullscreen-next"
+        onclick="fullscreenNext(event)">
+        ›
+    </button>
+
+    <!-- TOMBOL KEMBALI -->
+    <button
+        class="back-to-gallery"
+        onclick="closePhotoFullscreen(event)">
+        ← Kembali ke Album
+    </button>
+
+</div>
 
 
 
-        <!-- =================================================
-             PAGE 4 - SURAT
-        ================================================== -->
+            <!-- =================================================
+                 PAGE 4 - VIDEO
+            ================================================== -->
 
-        <section class="page">
+            <section class="page">
 
-            <div class="subtitle">
-                A letter for you
-            </div>
+                <div class="subtitle">
 
-            <h2>
-                Untuk Kamu 💌
-            </h2>
-
-
-            <div class="letter">
-
-                <p>
-                    Hai sayang,
-                </p>
-
-
-                <p>
-                    TULIS SURAT ULANG TAHUN KAMU DI SINI.
-                </p>
-
-
-                <p>
-                    Kamu bisa menceritakan bagaimana awal
-                    kalian bertemu, hal yang paling kamu
-                    suka dari dia, kenangan yang paling
-                    berkesan, atau hal-hal kecil yang
-                    membuat kamu bersyukur sudah mengenalnya.
-                </p>
-
-
-                <p>
-                    TULIS PESAN PRIBADI KAMU DI SINI.
-                </p>
-
-
-                <p>
-                    Semoga apa pun yang kamu impikan,
-                    perlahan bisa menjadi kenyataan.
-                    Semoga kamu selalu dikelilingi
-                    hal-hal baik dan orang-orang yang
-                    menyayangi kamu.
-                </p>
-
-
-                <div class="signature">
-
-                    With love,
-
-                    <br>
-
-                    <span id="namaKamu">
-                        NAMA KAMU
-                    </span>
-
-                    ❤️
+                    A little surprise 🎬
 
                 </div>
 
-            </div>
+
+                <h2>
+
+                    Ada Video Untuk Kamu ❤️
+
+                </h2>
 
 
-            <button onclick="nextPage()">
-                Masih ada satu lagi 💕
-            </button>
+                <div class="video-box">
 
-        </section>
+                    <video
+                        controls
+                        playsinline>
 
+                        <source
+                            src="video-surprise.mov"
+                            type="video/mp4">
 
+                        Browser kamu tidak mendukung video.
 
-        <!-- =================================================
-             PAGE 5
-        ================================================== -->
+                    </video>
 
-        <section class="page">
-
-            <div class="big-heart">
-                💖
-            </div>
-
-            <div class="subtitle">
-                My wish for you
-            </div>
-
-            <h2>
-                Semoga kamu selalu bahagia.
-            </h2>
+                </div>
 
 
-            <p>
-                Semoga di usia yang baru ini,
-                kamu semakin dekat dengan semua
-                impian yang kamu perjuangkan.
-            </p>
+                <p>
+
+                    SEDIKIT VIDEO ALUR MUNDUR
+                    WKWKW, MWAH
+
+                </p>
 
 
-            <p>
-                Kalau suatu hari semuanya terasa berat,
-                semoga kamu selalu ingat bahwa kamu
-                tidak harus menghadapi semuanya sendirian.
-            </p>
+                <button onclick="nextPage()">
+
+                    Lanjut 💌
+
+                </button>
+
+            </section>
 
 
-            <p>
-                Aku akan selalu senang melihat kamu
-                tumbuh, berkembang, dan menjadi versi
-                terbaik dari diri kamu.
-            </p>
+            <!-- =================================================
+                 PAGE 6 - SURAT
+            ================================================== -->
+
+            <section class="page">
+
+                <div class="subtitle">
+
+                    A letter for you
+
+                </div>
 
 
-            <button onclick="nextPage()">
-                Pesan terakhir ❤️
-            </button>
+                <h2>
 
-        </section>
+                    Untuk Kamu 💌
 
-
-
-        <!-- =================================================
-             PAGE 6 - FINAL
-        ================================================== -->
-
-        <section class="page">
-
-            <div class="big-heart">
-                💗
-            </div>
+                </h2>
 
 
-            <div class="subtitle">
-                One last thing
-            </div>
+                <div class="letter">
 
 
-            <h1>
+                    <p>
 
-                Selamat ulang tahun,
+                        Hai sayang,
 
-                <br>
-
-                <span class="name" id="nama3">
-                    NAMA DIA
-                </span>
-
-            </h1>
+                    </p>
 
 
-            <p class="final-message">
+                    <p>
 
-                Terima kasih sudah hadir
-                di hidupku.
+                        Selamat Ulang Tahun SAYANG!!!!
 
-                <br><br>
-
-                Terima kasih untuk setiap tawa,
-                setiap cerita,
-                setiap perhatian,
-                dan setiap momen kecil
-                yang sudah kita lewati bersama.
-
-                <br><br>
-
-                Semoga kita masih punya
-                banyak sekali cerita
-                untuk ditulis bersama. ❤️
-
-            </p>
+                    </p>
 
 
-            <div class="love">
+                    <p>
 
-                ♡ 💗 ♡ 💙 ♡
+                        Hai sayang, selamat bertambah umur yaa sayangku cintaku,
+                        semoga sayang selalu sehat, sukses dunia akhirat,
+                        lebih bisa mengontrol mood nya sayang,
+                        intinya semoga hal yang baik-baik selalu mendatangi sayang
+                        dan yang buruk-buruk dijauhkan dari sayang, AMINN❤️
 
-            </div>
+                    </p>
 
 
-            <button onclick="restart()">
+                    <p>
 
-                Ulangi dari awal ↻
+                        Maaf yaa sayang, belum bisa ngasih kado atau apapun yang terbaik,
+                        tapi aku Insyaallah selalu ngasih yang maksimal yang aku bisa untuk sekarang.
+                        Sayang jangan cape-cape nemenin aku pada waktu proses yaa sayang,
+                        AKU SAYANG KAMUUU!
 
-            </button>
 
-        </section>
+                    </p>
 
+
+                    <p>
+
+                        Semoga apa pun yang kita impikan,
+                        perlahan bisa menjadi kenyataan.
+                        Semoga kita selalu dikelilingi
+                        hal-hal baik dan orang-orang yang
+                        menyayangi kita. Semoga kita bisa
+                        selalu bersama sampai akhir hidup kita..
+
+                    </p>
+
+
+                    <div class="signature">
+
+                        With love,
+
+                        <br>
+
+                        <span id="namaKamu">
+
+                            NAMA KAMU
+
+                        </span>
+
+                        ❤️
+
+                    </div>
+
+                </div>
+
+
+                <button onclick="nextPage()">
+
+                    Masih ada satu lagi 💕
+
+                </button>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 PAGE 7
+            ================================================== -->
+
+            <section class="page">
+
+                <div class="big-heart">
+
+                    💖
+
+                </div>
+
+
+                <div class="subtitle">
+
+                    My wish for you
+
+                </div>
+
+
+                <h2>
+
+                    Semoga kamu selalu bahagia.
+
+                </h2>
+
+
+                <p>
+
+                    Semoga di usia yang baru ini,
+                    kamu semakin dekat dengan semua
+                    impian yang kamu perjuangkan.
+
+                </p>
+
+
+                <p>
+
+                    Kalau suatu hari semuanya terasa berat,
+                    semoga kamu selalu ingat bahwa kamu
+                    tidak harus menghadapi semuanya sendirian.
+
+                </p>
+
+
+                <p>
+
+                    Aku akan selalu senang melihat kamu
+                    tumbuh, berkembang, dan menjadi versi
+                    terbaik dari diri kamu.
+
+                </p>
+
+
+                <button onclick="nextPage()">
+
+                    Pesan terakhir ❤️
+
+                </button>
+
+            </section>
+
+            <section class="page">
+               <div class="final-surprise">
+
+    <p class="surprise-teaser">
+        Kamu pikir ini sudah selesai? 💗
+    </p>
+
+    <p class="surprise-small">
+        Sebenarnya masih ada satu hal lagi
+        yang ingin aku kasih ke kamu...
+    </p>
+
+    <button
+        id="giftButton"
+        onclick="openFinalGift()">
+
+        🎁 Buka Hadiah
+
+    </button>
+
+
+    <!-- VIDEO SURPRISE -->
+
+    <div
+        id="finalGift"
+        class="final-gift"
+        style="display:none;">
+
+        <div class="gift-icon">
+            🎁
+        </div>
+
+        <h2>
+            Satu video terakhir untuk kamu ❤️
+        </h2>
+
+        <div class="final-video">
+
+            <video
+                id="finalSurpriseVideo"
+                controls
+                playsinline>
+
+                <source
+                    src="video-surprise.mov"
+                    type="video/mp4">
+
+                Browser kamu tidak mendukung
+                pemutaran video.
+
+            </video>
+
+        </div>
+
+    </div>
+
+</div>
+        <button onclick="restart()">
+
+                    Ulangi dari awal ↻
+
+                </button>
+
+            </section>
+
+            <!-- =================================================
+                 PAGE 8 - FINAL
+            ================================================== -->
+
+            <section class="page">
+
+                <div class="big-heart">
+
+                    💗
+
+                </div>
+
+
+                <div class="subtitle">
+
+                    One last thing
+
+                </div>
+
+
+                <h1>
+
+                    Selamat ulang tahun,
+
+                    <br>
+
+                    <span
+                        class="name"
+                        id="nama3">
+
+                        NAMA DIA
+
+                    </span>
+
+                </h1>
+
+
+                <p class="final-message">
+
+                    Terima kasih sudah hadir
+                    di hidupku.
+
+                    <br><br>
+
+                    Terima kasih untuk setiap tawa,
+                    setiap cerita,
+                    setiap perhatian,
+                    dan setiap momen kecil
+                    yang sudah kita lewati bersama.
+
+                    <br><br>
+
+                    Semoga kita masih punya
+                    banyak sekali cerita
+                    untuk ditulis bersama. ❤️
+
+                </p>
+
+
+                <div class="love">
+
+                    ♡ 💗 ♡ 💙 ♡
+
+                </div>
+
+
+                
+
+            </section>
+
+
+        </div>
 
     </div>
 
@@ -996,106 +2646,210 @@
 
 <script>
 
+function openFinalGift() {
 
-/* ==========================================================
-   GALLERY FOTO
-========================================================== */
+    const gift =
+        document.getElementById("finalGift");
 
-const photos = [
+    const button =
+        document.getElementById("giftButton");
 
-    "foto1.jpeg",
-    "foto2.jpeg",
-    "foto3.jpg",
-    "foto4.jpg",
-    "foto5.jpg"
-
-];
-
-let currentPhoto = 0;
-
-const galleryPhoto =
-    document.getElementById("galleryPhoto");
-
-const photoCounter =
-    document.getElementById("photoCounter");
+    const video =
+        document.getElementById("finalSurpriseVideo");
 
 
-function showPhoto() {
+    // Tampilkan hadiah
+    gift.style.display = "block";
 
-    galleryPhoto.style.opacity = 0;
-
-    setTimeout(() => {
-
-        galleryPhoto.src =
-            photos[currentPhoto];
-
-        galleryPhoto.style.opacity = 1;
-
-    }, 200);
+    // Hilangkan tombol
+    button.style.display = "none";
 
 
-    photoCounter.textContent =
-        `${currentPhoto + 1} / ${photos.length}`;
+    // Scroll menuju video
+    gift.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    // Putar video
+    video.play().catch(() => {
+
+        console.log(
+            "Video menunggu interaksi pengguna."
+        );
+
+    });
 
 }
 
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
 
-function nextPhoto() {
+const music =
+    document.getElementById("bgMusic");
 
-    currentPhoto++;
+const playButton =
+    document.getElementById("playButton");
 
-    if(currentPhoto >= photos.length) {
+const musicProgress =
+    document.getElementById("musicProgress");
 
-        currentPhoto = 0;
+const currentTimeDisplay =
+    document.getElementById("currentTime");
+
+const durationDisplay =
+    document.getElementById("duration");
+
+
+/* PLAY / PAUSE */
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play();
+
+        playButton.textContent = "⏸";
+
+    } else {
+
+        music.pause();
+
+        playButton.textContent = "▶";
 
     }
 
-    showPhoto();
-
 }
 
-function startExperience() {
 
-    const music =
-        document.getElementById("bgMusic");
+/* UPDATE PROGRESS */
 
-    music.volume = 0.4;
+music.addEventListener(
+    "timeupdate",
+    function() {
 
-    music.play();
+        if (!music.duration) {
+            return;
+        }
 
-    nextPage();
-}
+        const progress =
+            (music.currentTime /
+            music.duration) * 100;
 
-function previousPhoto() {
+        musicProgress.style.width =
+            progress + "%";
 
-    currentPhoto--;
 
-    if(currentPhoto < 0) {
-
-        currentPhoto =
-            photos.length - 1;
+        currentTimeDisplay.textContent =
+            formatTime(
+                music.currentTime
+            );
 
     }
+);
 
-    showPhoto();
+
+/* GET DURATION */
+
+music.addEventListener(
+    "loadedmetadata",
+    function() {
+
+        durationDisplay.textContent =
+            formatTime(
+                music.duration
+            );
+
+    }
+);
+
+
+/* RESET BUTTON WHEN SONG ENDS */
+
+music.addEventListener(
+    "ended",
+    function() {
+
+        playButton.textContent = "▶";
+
+        musicProgress.style.width = "0%";
+
+    }
+);
+
+
+/* CLICK PROGRESS BAR */
+
+document
+    .querySelector(
+        ".music-progress-container"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (!music.duration) {
+                return;
+            }
+
+            const width =
+                this.clientWidth;
+
+            const clickPosition =
+                event.offsetX;
+
+            music.currentTime =
+                (clickPosition / width)
+                * music.duration;
+
+        }
+    );
+
+
+/* FORMAT TIME */
+
+function formatTime(seconds) {
+
+    if (isNaN(seconds)) {
+        return "0:00";
+    }
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+    const remainingSeconds =
+        Math.floor(
+            seconds % 60
+        );
+
+    return (
+        minutes +
+        ":" +
+        String(
+            remainingSeconds
+        ).padStart(2, "0")
+    );
 
 }
 
+/* =========================================================
+   EDIT NAMA
+========================================================= */
 
-showPhoto();
+const namaDia =
+    "JOYYY";
 
-/* ==========================================================
-   EDIT NAMA DI SINI
-========================================================== */
-
-const namaDia = "JEJE";
-
-const namaKamu = "RAFI STECU";
+const namaKamu =
+    "RAPI STECUU";
 
 
-/* ==========================================================
-   MASUKKAN NAMA KE WEBSITE
-========================================================== */
+/* =========================================================
+   MASUKKAN NAMA
+========================================================= */
 
 document.getElementById("nama1").textContent =
     namaDia;
@@ -1110,93 +2864,163 @@ document.getElementById("namaKamu").textContent =
     namaKamu;
 
 
-/* ==========================================================
-   PAGE SYSTEM
-========================================================== */
 
-const pages =
-    document.querySelectorAll(".page");
+/* =========================================================
+   🔒 LOCK SCREEN
+========================================================= */
 
-let currentPage = 0;
+/*
+   TANGGAL BUKA:
+
+   15 September 2026
+   pukul 00:00
+
+   Waktu mengikuti waktu
+   perangkat yang membuka website.
+*/
+
+const unlockDate =
+    new Date(
+        "September 15, 2026 00:00:00"
+    );
 
 
-/* ==========================================================
-   PROGRESS DOT
-========================================================== */
+function updateCountdown() {
 
-const progress =
-    document.getElementById("progress");
+    const now =
+        new Date();
+
+    const difference =
+        unlockDate - now;
 
 
-pages.forEach((page, index) => {
+    /*
+       Kalau sudah tanggal 15
+       website langsung dibuka.
+    */
 
-    const dot =
-        document.createElement("div");
+    if (difference <= 0) {
 
-    dot.className = "dot";
+        unlockWebsite();
 
-    if(index === 0) {
-        dot.classList.add("active");
+        return;
+
     }
 
-    progress.appendChild(dot);
 
-});
-
-
-function updateProgress() {
-
-    const dots =
-        document.querySelectorAll(".dot");
-
-    dots.forEach((dot, index) => {
-
-        dot.classList.toggle(
-            "active",
-            index === currentPage
+    const days =
+        Math.floor(
+            difference /
+            (1000 * 60 * 60 * 24)
         );
 
-    });
+
+    const hours =
+        Math.floor(
+            (difference %
+            (1000 * 60 * 60 * 24))
+            /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference %
+            (1000 * 60 * 60))
+            /
+            (1000 * 60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference %
+            (1000 * 60))
+            /
+            1000
+        );
+
+
+    document.getElementById("days")
+        .textContent =
+        String(days).padStart(2, "0");
+
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2, "0");
+
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2, "0");
+
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2, "0");
 
 }
 
 
-/* ==========================================================
-   NEXT PAGE
-========================================================== */
+let websiteUnlocked = false;
 
-function nextPage() {
+function unlockWebsite() {
 
-    if(currentPage < pages.length - 1) {
-
-        pages[currentPage]
-            .classList.remove("active");
-
-        currentPage++;
-
-        pages[currentPage]
-            .classList.add("active");
-
-        updateProgress();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
+    // Jangan jalankan lagi kalau website sudah terbuka
+    if (websiteUnlocked) {
+        return;
     }
 
+    websiteUnlocked = true;
+
+    // Tetap tampilkan lock screen
+    // sebagai halaman "surprise ready"
+    document.getElementById("lockScreen")
+        .style.display = "flex";
+
+    // Ubah ikon
+    document.querySelector(".lock-icon")
+        .textContent = "🔓";
+
+    // Ubah judul
+    document.querySelector(".lock-card h1")
+        .textContent = "It's Your Day! 💗";
+
+    // Ubah pesan
+    document.querySelector(".lock-card p")
+        .textContent =
+        "Surprise kamu sudah siap. Sekarang waktunya membuka sesuatu yang sudah aku siapkan khusus untuk kamu. ❤️";
+
+    // Hilangkan countdown
+    document.querySelector(".countdown")
+        .style.display = "none";
+
+    // Hilangkan tulisan Come back
+    document.querySelector(".lock-message")
+        .style.display = "none";
+
+    // Tampilkan tombol
+    document.getElementById("openSurpriseButton")
+        .style.display = "inline-block";
 }
 
 
-/* ==========================================================
-   RESTART
-========================================================== */
+function openSurprise() {
 
-function restart() {
+    // Sembunyikan lock screen
+    document.getElementById("lockScreen")
+        .style.display = "none";
 
-    pages[currentPage]
-        .classList.remove("active");
+    // Tampilkan website utama
+    document.getElementById("mainWebsite")
+        .style.display = "block";
+
+    // Pastikan mulai dari halaman pertama
+    pages.forEach(page => {
+        page.classList.remove("active");
+    });
 
     currentPage = 0;
 
@@ -1205,33 +3029,520 @@ function restart() {
 
     updateProgress();
 
+    // ==========================================
+    // OTOMATIS PLAY LAGU
+    // ==========================================
+
+    const music =
+        document.getElementById("bgMusic");
+
+    if (music) {
+
+        music.volume = 0.4;
+
+        music.loop = true;
+
+        music.play()
+            .then(() => {
+
+                // Ubah tombol menjadi Pause
+                const playButton =
+                    document.getElementById("playButton");
+
+                if (playButton) {
+                    playButton.textContent = "⏸";
+                }
+
+            })
+            .catch(() => {
+
+                // Jika browser menolak autoplay,
+                // tombol Play tetap bisa digunakan
+                console.log(
+                    "Autoplay diblokir browser."
+                );
+
+            });
+
+    }
+
+    // Scroll ke halaman pertama website
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
 }
 
 
-/* ==========================================================
-   FLOATING HEARTS
-========================================================== */
-
-const heartContainer =
-    document.getElementById("hearts");
+updateCountdown();
 
 
-const heartSymbols = [
-    "💗",
-    "💕",
-    "💖",
-    "💘",
-    "💙",
-    "♡"
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+
+/* =========================================================
+   PAGE SYSTEM
+========================================================= */
+
+const pages =
+    document.querySelectorAll(".page");
+
+
+let currentPage = 0;
+
+
+
+/* =========================================================
+   PROGRESS DOT
+========================================================= */
+
+const progress =
+    document.getElementById("progress");
+
+
+pages.forEach(
+    (page, index) => {
+
+        const dot =
+            document.createElement("div");
+
+        dot.className =
+            "dot";
+
+
+        if(index === 0) {
+
+            dot.classList.add(
+                "active"
+            );
+
+        }
+
+
+        progress.appendChild(dot);
+
+    }
+);
+
+
+
+function updateProgress() {
+
+    const dots =
+        document.querySelectorAll(
+            ".dot"
+        );
+
+
+    dots.forEach(
+        (dot, index) => {
+
+            dot.classList.toggle(
+                "active",
+                index === currentPage
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   START EXPERIENCE
+========================================================= */
+
+function startExperience() {
+
+    const music =
+        document.getElementById(
+            "bgMusic"
+        );
+
+
+    /*
+       Kalau lagu sudah tersedia,
+       lagu akan mulai ketika
+       tombol Buka diklik.
+    */
+
+    if(music) {
+
+        music.volume = 0.4;
+
+        music.play()
+            .catch(
+                () => {}
+            );
+
+    }
+
+
+    nextPage();
+
+}
+
+
+
+/* =========================================================
+   NEXT PAGE
+========================================================= */
+
+function nextPage() {
+
+    if(
+        currentPage <
+        pages.length - 1
+    ) {
+
+        pages[currentPage]
+            .classList.remove(
+                "active"
+            );
+
+
+        currentPage++;
+
+
+        pages[currentPage]
+            .classList.add(
+                "active"
+            );
+
+
+        updateProgress();
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+function restart() {
+
+    pages[currentPage]
+        .classList.remove(
+            "active"
+        );
+
+
+    currentPage = 0;
+
+
+    pages[currentPage]
+        .classList.add(
+            "active"
+        );
+
+
+    updateProgress();
+
+}
+
+
+
+/* =========================================================
+   PHOTO GALLERY
+========================================================= */
+
+
+/* =========================================================
+   INTERACTIVE PHOTO GALLERY
+========================================================= */
+
+const photos = [
+    "foto1.jpg",
+    "foto2.jpg",
+    "foto3.jpg",
+    "foto4.jpg",
+    "foto5.jpg"
 ];
 
+const captions = [
+    "Salah satu momen kecil yang selalu berhasil bikin aku senyum. ❤️",
 
-for(let i = 0; i < 30; i++) {
+    "Kalau dipikir-pikir, ternyata banyak banget cerita yang sudah kita lewati.",
+
+    "Mungkin sederhana, tapi momen seperti ini yang ingin aku simpan selamanya. 💗",
+
+    "Terima kasih sudah menjadi bagian dari cerita hidupku.",
+
+    "Dan dari semua foto ini, aku harap kita masih punya banyak sekali cerita berikutnya. 💕"
+];
+
+let currentPhoto = 0;
+
+const galleryPhoto =
+    document.getElementById("galleryPhoto");
+
+const photoCounter =
+    document.getElementById("photoCounter");
+
+const photoCaption =
+    document.getElementById("photoCaption");
+
+
+function showPhoto() {
+
+    if (photos.length === 0) {
+        return;
+    }
+
+    galleryPhoto.style.opacity = "0";
+
+    setTimeout(() => {
+
+        galleryPhoto.src =
+            photos[currentPhoto];
+
+        galleryPhoto.style.opacity = "1";
+
+    }, 200);
+
+
+    photoCounter.textContent =
+        `${currentPhoto + 1} / ${photos.length}`;
+
+
+    photoCaption.textContent =
+        captions[currentPhoto] || "";
+}
+
+
+/* =========================================================
+   NEXT PHOTO
+========================================================= */
+
+function nextPhoto() {
+
+    currentPhoto++;
+
+    if (currentPhoto >= photos.length) {
+        currentPhoto = 0;
+    }
+
+    showPhoto();
+}
+
+
+/* =========================================================
+   PREVIOUS PHOTO
+========================================================= */
+
+function previousPhoto() {
+
+    currentPhoto--;
+
+    if (currentPhoto < 0) {
+        currentPhoto = photos.length - 1;
+    }
+
+    showPhoto();
+}
+
+
+/* =========================================================
+   FULLSCREEN
+========================================================= */
+
+function openPhotoFullscreen() {
+
+    const fullscreen =
+        document.getElementById(
+            "photoFullscreen"
+        );
+
+    const fullscreenPhoto =
+        document.getElementById(
+            "fullscreenPhoto"
+        );
+
+    const fullscreenCaption =
+        document.getElementById(
+            "fullscreenCaption"
+        );
+
+
+    fullscreenPhoto.src =
+        photos[currentPhoto];
+
+    fullscreenCaption.textContent =
+        captions[currentPhoto] || "";
+
+
+    fullscreen.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+/* =========================================================
+   CLOSE FULLSCREEN
+========================================================= */
+
+function closePhotoFullscreen(event) {
+    if (event) {
+        event.stopPropagation();
+    }
+
+    document.getElementById("photoFullscreen").classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+
+/* =========================================================
+   FULLSCREEN NEXT
+========================================================= */
+
+function fullscreenNext(event) {
+
+    event.stopPropagation();
+
+    nextPhoto();
+
+    updateFullscreenPhoto();
+}
+
+
+/* =========================================================
+   FULLSCREEN PREVIOUS
+========================================================= */
+
+function fullscreenPrevious(event) {
+
+    event.stopPropagation();
+
+    previousPhoto();
+
+    updateFullscreenPhoto();
+}
+
+
+/* =========================================================
+   UPDATE FULLSCREEN
+========================================================= */
+
+function updateFullscreenPhoto() {
+
+    document.getElementById(
+        "fullscreenPhoto"
+    ).src = photos[currentPhoto];
+
+
+    document.getElementById(
+        "fullscreenCaption"
+    ).textContent =
+        captions[currentPhoto] || "";
+}
+
+
+/* =========================================================
+   LOVE BUTTON
+========================================================= */
+
+function sendLove(event) {
+
+    event.stopPropagation();
 
     const heart =
         document.createElement("div");
 
-    heart.className = "heart";
+    heart.className = "love-pop";
+
+    heart.textContent =
+        ["❤️", "💗", "💕", "💖"][
+            Math.floor(
+                Math.random() * 4
+            )
+        ];
+
+
+    heart.style.left =
+        (event.clientX - 10) + "px";
+
+    heart.style.top =
+        (event.clientY - 10) + "px";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+        heart.remove();
+    }, 1000);
+}
+
+
+/* =========================================================
+   INITIAL PHOTO
+========================================================= */
+
+showPhoto();
+
+
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+const heartContainer =
+    document.getElementById(
+        "hearts"
+    );
+
+
+const heartSymbols = [
+
+    "💗",
+
+    "💕",
+
+    "💖",
+
+    "💘",
+
+    "💙",
+
+    "♡"
+
+];
+
+
+for(
+    let i = 0;
+    i < 30;
+    i++
+) {
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+
+    heart.className =
+        "heart";
+
 
     heart.textContent =
         heartSymbols[
@@ -1247,23 +3558,34 @@ for(let i = 0; i < 30; i++) {
 
 
     heart.style.fontSize =
-        (14 + Math.random() * 25) + "px";
+        (
+            14 +
+            Math.random() * 25
+        ) + "px";
 
 
     heart.style.animationDuration =
-        (6 + Math.random() * 8) + "s";
+        (
+            6 +
+            Math.random() * 8
+        ) + "s";
 
 
     heart.style.animationDelay =
-        (Math.random() * 10) + "s";
+        (
+            Math.random() * 10
+        ) + "s";
 
 
-    heartContainer.appendChild(heart);
+    heartContainer.appendChild(
+        heart
+    );
 
 }
 
 
 </script>
+
 
 </body>
 </html>
